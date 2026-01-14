@@ -79,3 +79,21 @@ func (repository *TaskRepository) FindTaskById(ctx context.Context, id int) (mod
 	}
 	return task, nil
 }
+
+func (repository *TaskRepository) Update(ctx context.Context, id int, task models.Task) error {
+	_, err := repository.db.Exec(ctx, "update tasks set title = $1, status = $2 where id = $3", task.Title, task.Status, id)
+
+	if err != nil {
+		return err
+	}
+	return err
+}
+
+func (repository *TaskRepository) Delete(ctx context.Context, id int) error {
+	_, err := repository.db.Exec(ctx, "delete from tasks where id = $1", id)
+
+	if err != nil {
+		return err
+	}
+	return err
+}
