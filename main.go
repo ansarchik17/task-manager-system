@@ -31,8 +31,10 @@ func main() {
 	tasksRepository := repositories.NewTaskRepository(connection)
 	taskHandler := handler.NewTaskHandler(tasksRepository)
 	r.POST("/tasks", taskHandler.CreateTask)
-	r.GET("/tasks", taskHandler.GetAllTasks)
-	r.GET("/task/:id", taskHandler.GetTaskById)
+	r.GET("/tasks/get", taskHandler.GetAllTasks)
+	r.GET("/task/get_task/:id", taskHandler.GetTaskById)
+	r.PUT("/task/update/:id", taskHandler.UpdateTask)
+	r.DELETE("/task/delete/:id", taskHandler.DeleteTask)
 	r.Run(":8070")
 }
 
